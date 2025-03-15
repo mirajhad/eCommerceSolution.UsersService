@@ -10,7 +10,7 @@ namespace eCommerce.Infrastructure
         
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddSingleton<IUsersRepository, UserRepository>();
+            services.AddTransient<IUsersRepository, UserRepository>();
             return services;
         }
     }
