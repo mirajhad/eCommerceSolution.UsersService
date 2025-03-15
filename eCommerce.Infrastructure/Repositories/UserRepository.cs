@@ -1,4 +1,4 @@
-﻿
+﻿using Dapper;
 using eCommerce.Core.DTO;
 using eCommerce.Core.Entities;
 using eCommerce.Core.RepositoryContracts;
@@ -18,7 +18,20 @@ namespace eCommerce.Infrastructure.Repositories
         public async Task<ApplicationUser?> AddUser(ApplicationUser user)
         {
             user.UserID = Guid.NewGuid();
-            return user;
+
+            // Add user to database
+            string query = "INSERT INTO public.\"Users\" (\"UserID\", \"Email\", \"PersonName\", \"Gender\", \"Password\") VALUES(@UserID, @Email, @PersonName, @Gender, @Password)";
+
+            int rowCountAffected= await _dbContext.Connection.ExecuteAsync(query, user);
+            if (rowCountAffected > 0)
+            {
+                return user;
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public async Task<ApplicationUser?> GetUserByEmailAndPassword(string? email, string? password)
