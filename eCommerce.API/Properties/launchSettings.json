@@ -12,7 +12,7 @@
         "POSTGRES_HOST": "localhost"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5032"
+      "applicationUrl": "http://localhost:9090"
     },
     "https": {
       "commandName": "Project",
